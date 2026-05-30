@@ -1,0 +1,20 @@
+import { cn } from "@/lib/cn";
+
+interface CardProps {
+  children: React.ReactNode;
+  className?: string;
+}
+
+export default function Card({ children, className }: CardProps) {
+  return (
+    <div
+      className={cn(
+        "rounded-xl bg-background-card border border-border",
+        "shadow-[var(--shadow-card)]",
+        className
+      )}
+    >
+      {children}
+    </div>
+  );
+}

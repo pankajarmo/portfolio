@@ -1,26 +1,140 @@
 @import "tailwindcss";
 
+/* ============================================================
+   LIGHT MODE — semantic color tokens
+   ============================================================ */
 :root {
+  color-scheme: light;
+
   --background: #ffffff;
-  --foreground: #171717;
+  --background-subtle: #f8fafc;
+  --background-card: #ffffff;
+
+  --foreground: #0f172a;
+  --foreground-muted: #64748b;
+  --foreground-faint: #94a3b8;
+
+  --accent: #6366f1;
+  --accent-hover: #4f46e5;
+  --accent-foreground: #ffffff;
+  --accent-subtle: #eef2ff;
+
+  --border: #e2e8f0;
+  --border-strong: #cbd5e1;
+
+  --shadow-card: 0 1px 3px 0 rgb(0 0 0 / 0.07), 0 1px 2px -1px rgb(0 0 0 / 0.07);
+  --shadow-card-hover: 0 10px 25px -5px rgb(99 102 241 / 0.15),
+    0 4px 10px -5px rgb(99 102 241 / 0.1);
+  --shadow-nav: 0 1px 0 0 var(--border);
 }
 
+/* ============================================================
+   DARK MODE — class-controlled (no media query)
+   ============================================================ */
+.dark {
+  color-scheme: dark;
+
+  --background: #0a0a0f;
+  --background-subtle: #111118;
+  --background-card: #16161e;
+
+  --foreground: #f1f5f9;
+  --foreground-muted: #94a3b8;
+  --foreground-faint: #475569;
+
+  --accent: #818cf8;
+  --accent-hover: #6366f1;
+  --accent-foreground: #ffffff;
+  --accent-subtle: #1e1b4b;
+
+  --border: #1e293b;
+  --border-strong: #334155;
+
+  --shadow-card: 0 1px 3px 0 rgb(0 0 0 / 0.4);
+  --shadow-card-hover: 0 10px 25px -5px rgb(129 140 248 / 0.2),
+    0 4px 10px -5px rgb(129 140 248 / 0.15);
+  --shadow-nav: 0 1px 0 0 var(--border);
+}
+
+/* ============================================================
+   TAILWIND v4 — map CSS vars to utility classes
+   ============================================================ */
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+
+  --color-background: var(--background);
+  --color-background-subtle: var(--background-subtle);
+  --color-background-card: var(--background-card);
+
+  --color-foreground: var(--foreground);
+  --color-foreground-muted: var(--foreground-muted);
+  --color-foreground-faint: var(--foreground-faint);
+
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent-subtle: var(--accent-subtle);
+
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ============================================================
+   BASE STYLES
+   ============================================================ */
+html {
+  scroll-behavior: smooth;
+}
+
+*,
+::before,
+::after {
+  border-color: var(--border);
+  box-sizing: border-box;
 }
 
 body {
-  background: var(--background);
+  background-color: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+::selection {
+  background-color: var(--accent-subtle);
+  color: var(--accent);
+}
+
+/* ============================================================
+   REDUCED MOTION
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ============================================================
+   CUSTOM SCROLLBAR
+   ============================================================ */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--background);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border-strong);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent);
 }
